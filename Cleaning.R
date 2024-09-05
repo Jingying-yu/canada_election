@@ -1,6 +1,7 @@
 ####Workspace Setup####
 library(tidyverse)
 library(janitor)
+library(dplyr)
 
 ####Script####
 raw_elections_data <-
@@ -14,7 +15,8 @@ clean_elections_data <-
   clean_names(raw_elections_data)
 
 clean_elections_data <- clean_elections_data |> 
-  rename(electoral_district_name = electoral_district_name_nom_de_circonscription, elected_candidate = elected_candidate_candidat_elu)
+  mutate(electoral_district_name_nom_de_circonscription = electoral_district_name, 
+         elected_candidate_candidat_elu = lected_candidate)
 
 clean_elections_data <-
   clean_elections_data |>
@@ -25,9 +27,9 @@ clean_elections_data <-
   )|>
   select(-Other)
 
-df$Party <- recode(clean_elections_data$Party,
-                   "Libéral" = "Liberal",
-                   "Conservateur" = "Conservative",
-                   "Bloc Québécois" = "Bloc Québécois",
-                   "Nouveau Parti démocratique" = "New Democratic",
-                   "Parti vert" = "Green")
+clean_elections_data <- clean_elections_data |> mutate(
+  case_when(party == "Libéral" ~ "Liberal",
+                  party =="Conservateur" ~ "Conservative",
+                   party == "Bloc Québécois" ~ "Bloc Québécois",
+                  party == "Nouveau Parti démocratique" ~ "New Democratic",
+                   party == "Parti vert" ~ "Green"))
