@@ -20,8 +20,8 @@ cleaned_elections_data <-
 names(cleaned_elections_data)
 
 # only select the two desired columns
-cleaned_elections_data <- cleaned_elections_data %>%
-  select(electoral_district_name_nom_de_circonscription, elected_candidate_candidat_elu) %>%
+cleaned_elections_data <- cleaned_elections_data |>
+  select(electoral_district_name_nom_de_circonscription, elected_candidate_candidat_elu) |>
   rename(electoral_district_name = electoral_district_name_nom_de_circonscription,
          elected_candidate =  elected_candidate_candidat_elu)
 
@@ -34,7 +34,7 @@ cleaned_elections_data <-
     into = c("Other", "party"),
     sep = "/"
   ) |>
-  select(-Other) %>%
+  select(-Other) |>
   mutate(party = 
            case_when(party == 'Libéral' ~ 'Liberal',
                      party == 'Conservateur' ~ 'Conservative',
