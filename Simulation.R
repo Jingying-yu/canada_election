@@ -7,16 +7,16 @@ library(janitor)
 
 ####Script####
 
-set.seed(21)
 
+set.seed(1009)
 simulated_data <-
   tibble(
     # Use 1 through to 151 to represent each division
-    "Division" = 1:151,
+    "Division" = 1:338,
     # Randomly pick an option, with replacement, 151 times
     "Party" = sample(
-      x = c("Liberal", "Labor", "National", "Green", "Other"),
-      size = 151,
+      x = c("Liberal", "Conservative", "Bloc Québécois", "New Democratic", "Green", "other"),
+      size = 338,
       replace = TRUE
     )
   )

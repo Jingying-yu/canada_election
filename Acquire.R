@@ -6,9 +6,8 @@ library(janitor)
 
 raw_elections_data <-
   read_csv(
-    file = 'raw_data/table_tableau11.csv',
-    show_col_types = FALSE,
-    skip = 1
+    file = 'input/table_tableau11.csv',
+    show_col_types = FALSE
   )
 
 write_csv(
